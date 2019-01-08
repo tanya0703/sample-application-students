@@ -13,8 +13,16 @@ before_install:
 # Run Unit Test and Integration Tests
 script:
   - mvn verify
-
+  - mvn clean install sonar:sonar \
+    -Dsonar.projectKey=<SONAR_PROJECT_KEY> \
+    -Dsonar.organization=<SONAR_ORGANISATION_KEY> \
+    -Dsonar.host.url=https://sonarcloud.io \
+    -Dsonar.login=$SONAR_TOKEN
 # Cache the .m2 folder to prevent redownloading dependencies on each build
 cache:
   directories:
   - "$HOME/.m2/repository"
+
+env:
+  global:
+    - secure: "PCHT+jcM+xTH+ISfPJ5ABw5+dzmphOSOjFKWo3wzuMg/IP0A44XsyTVODU4fw7eSfCRzR2Hpxc7yr4iiDDSZsufSFpJD67uv8sV+rGs84wkLAmeVVA/yDsOB6zz9qn5aexxQc6K8AxJeWl7FG7XczH8AZq47JsBQ/D593R6esgYJNe1vxg63YzwhK9r73/z+3jqybcq3CH1BJb077MjOmrFmaav1kL5mQpEptpZ6xy6dMxCRgB2ySIdH8euLvmt7215UyI5kE7ok07GowZdBniKUJ1aizQfmuVA8d/iyZeCE0PvCZOTzMi8IyErvtRsxznYcoVV30kbSoAdI1qSKzvDIfRgMWFlZWLjoh0kdkOjIC2rwRZ2cHq14L0C0FM/7SKgmTI+GMb81d+CnwKF/vpsV9bDgvMRbrAqN/8SmuwRzmRPrSkosHtiz/eIGQrTWMX6zIt9aRuTVuchMmp2yuxMhOd5+Ku4PNuDJ+pQ5AnDDqgZFDnEN/VzEBSPdGfV6IUFWp2g/FsXkUrQee8W9fst5BVogG1xP7WFFaaK/cr2k4QbOYtNI44OYLMqc0c0Q1VtSA2VPURnvzS0MUZz6sD3y8D/z1566jsK4/x2lbfr2AluLonXUlx69Tn9m4CRgCtTV6qXWZThUk9QXXYOn62nui/dp33v6FazQle42tBg="
